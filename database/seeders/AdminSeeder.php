@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class AdminSeeder extends Seeder
 {
@@ -15,13 +15,12 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-    
-        for ($i = 1; $i <= 5; $i++) {
-            Admin::create([
-                'name' => "Admin $i",
-                'email' => "admin$i@example.com",
-                'password' => Hash::make('admin@123'), 
-            ]);
-        }
+        DB::table('admins')->truncate();
+
+       Admin::create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('admin@123'),  
+        ]);
     }
 }
